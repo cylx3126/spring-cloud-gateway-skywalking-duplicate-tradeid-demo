@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: LoggingTraceId
+      routes:
+        - id: bad
+          uri: forward:/forward-test
+          predicates: Path=/forward
+        - id: good
+          uri: https://www.gstatic.com
+          predicates: Path=/generate_204
